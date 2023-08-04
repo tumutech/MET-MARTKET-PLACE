@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.met1">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/met_logo_1_"
+        android:label="Met Market Place"
+        android:roundIcon="@drawable/green_button_background"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MET">
+        <activity
+            android:name="com.example.met1.Activity.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.met1.Activity.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.met1.Activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.met1.Activity.Admin"
+            android:exported="false" />
+        <activity
+            android:name="com.example.met1.Activity.SignupActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.met1.Activity.Login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
