@@ -7,19 +7,17 @@ public class ProductDomain implements Serializable {
     private String description;
     private String picUrl;
     private double price;
-    private int time;
-    private int energy;
-    private double score;
+    private String location;
+    private double discount;
     private int numberinCart;
 
-    public ProductDomain(String title, String description, String picUrl, double price, int time, int energy, double score) {
+    public ProductDomain(String title, String description, String picUrl, double price, String location, double discount) {
         this.title = title;
         this.description = description;
         this.picUrl = picUrl;
         this.price = price;
-        this.time = time;
-        this.energy = energy;
-        this.score = score;
+        this.location = location;
+        this.discount = discount;
     }
 
     public String getTitle() {
@@ -54,28 +52,20 @@ public class ProductDomain implements Serializable {
         this.price = price;
     }
 
-    public int getTime() {
-        return time;
+    public String getLocation() {
+        return location;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public int getEnergy() {
-        return energy;
+    public double getDiscount() {
+        return discount;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = energy;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public int getNumberinCart() {

@@ -3,6 +3,7 @@ package com.example.met1.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,12 +69,13 @@ public class UserHomeFragment extends Fragment {
                 " melted cheddar cheese, fresh lettuce, tomato, and\n" +
                 " our secret sauce, this classic burger will leave you\n" +
                 " wanting more. Served with crispy fries and a drink,\n" +
-                " it's the perfect meal for any occasion.","fast_1",15,20,120,4));
+                " it's the perfect meal for any occasion.","fast_1",15000,"Boma",120,4));
         items.add(new ProductDomain("Pizza Peperoni","Get a taste of Italy with our delicious Pepperoni Pizza. Made with freshly rolled dough, zesty tomato sauce, mozzarella cheese, and topped with spicy pepperoni slices, this pizza is sure to be a crowd-pleaser. Perfectly baked in a wood-fired oven, it's the perfect choice for a quick lunch or a family dinner."
-                ,"fast_2",10,25,200,5));
+                ,"fast_2",12000,"Katete",200,5));
         items.add(new ProductDomain("Vegetable Pizza","Looking for a healthier option? Try our Vegetable Pizza, made with a variety of fresh veggies such as bell peppers, onions, mushrooms, olives, and tomatoes. Topped with mozzarella cheese and a tangy tomato sauce, this pizza is full of flavor and goodness. Perfect for vegetarians and anyone who wants to add more greens to their diet."
-                ,"fast_3",13,30,100,4.5));
-        recyclerViewFood.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+                ,"fast_3",1500,"Kiswahili",100,4.5));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerViewFood.setLayoutManager(gridLayoutManager);
 
         adapterFoodList=new FoodListAdapter(items);
         recyclerViewFood.setAdapter(adapterFoodList);

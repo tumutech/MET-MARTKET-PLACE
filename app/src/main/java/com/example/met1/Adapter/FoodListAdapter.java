@@ -1,5 +1,6 @@
 package com.example.met1.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -30,16 +31,16 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_food_list, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_product_list, parent, false);
         context = parent.getContext();
         return new ViewHolder(inflate);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.titleTxt.setText(items.get(position).getTitle());
-        holder.timeTxt.setText(items.get(position).getTime() + " min");
-        holder.ScoreTxt.setText("" + items.get(position).getScore());
+        holder.location.setText(items.get(position).getLocation());
+        holder.price.setText("UGX" + items.get(position).getPrice());
         int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPicUrl(), "drawable", holder.itemView.getContext().getPackageName());
 
         Glide.with(holder.itemView.getContext())
@@ -63,14 +64,14 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTxt, timeTxt, ScoreTxt;
+        TextView titleTxt, location, price;
         ImageView pic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTxt = itemView.findViewById(R.id.titleTxt);
-            timeTxt = itemView.findViewById(R.id.timeTxt);
-            ScoreTxt = itemView.findViewById(R.id.scoreTxt);
+            titleTxt = itemView.findViewById(R.id.product_name);
+            location = itemView.findViewById(R.id.location);
+            price = itemView.findViewById(R.id.product_price);
             pic = itemView.findViewById(R.id.pic);
 
         }

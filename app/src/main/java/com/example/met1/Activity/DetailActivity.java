@@ -44,8 +44,8 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTxt.setText(object.getDescription());
         numberOrderTxt.setText("" + numberOrder);
         caloryTxt.setText(object.getEnergy() + " Cal");
-        startTxt.setText(object.getScore() + "");
-        timeTxt.setText(object.getTime() + " min");
+        startTxt.setText(object.getDiscount() + "");
+        timeTxt.setText(object.getLocation() + " min");
         addToCartBtn.setText("Add to cart - $" + Math.round(numberOrder * object.getPrice()));
 
         plusBtn.setOnClickListener(v -> {
@@ -68,9 +68,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initView() {
         addToCartBtn = findViewById(R.id.addToCartBtn);
-        timeTxt = findViewById(R.id.timeTxt);
+        timeTxt = findViewById(R.id.location);
         feeTxt = findViewById(R.id.priceTxt);
-        titleTxt=findViewById(R.id.titleTxt);
+        titleTxt=findViewById(R.id.product_name);
         descriptionTxt = findViewById(R.id.descriptionTxt);
         numberOrderTxt = findViewById(R.id.numberItemTxt);
         plusBtn = findViewById(R.id.plusCardBtn);

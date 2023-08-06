@@ -3,4 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="mbarara">Mbarara City</string>
+    <string-array name="category_array">
+        <item>Select Category</item>
+        <item>Gadgets</item>
+        <item>Phone</item>
+        <item>Computer</item>
+        <item>Fashions</item>
+        <item>Shoes</item>
+        <item>Others</item>
+    </string-array>
+    <string name="select_category">Select Category</string>
 </resources>

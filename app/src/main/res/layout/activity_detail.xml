@@ -52,7 +52,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/foodPic">
 
                     <TextView
-                        android:id="@+id/titleTxt"
+                        android:id="@+id/product_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -104,7 +104,7 @@
                             app:srcCompat="@drawable/time" />
 
                         <TextView
-                            android:id="@+id/timeTxt"
+                            android:id="@+id/location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -125,7 +125,7 @@
                             android:layout_margin="8dp"
                             android:text="Delivery"
                             android:textColor="@color/black"
-                            app:layout_constraintEnd_toEndOf="@+id/timeTxt"
+                            app:layout_constraintEnd_toEndOf="@+id/location"
                             app:layout_constraintStart_toStartOf="@+id/imageView9"
                             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -174,7 +174,7 @@
                             android:layout_margin="8dp"
                             android:text="Rating"
                             android:textColor="@color/black"
-                            app:layout_constraintEnd_toEndOf="@+id/timeTxt"
+                            app:layout_constraintEnd_toEndOf="@+id/location"
                             app:layout_constraintStart_toStartOf="@+id/imageView9"
                             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -221,7 +221,7 @@
                             android:layout_margin="8dp"
                             android:text="Energy"
                             android:textColor="@color/black"
-                            app:layout_constraintEnd_toEndOf="@+id/timeTxt"
+                            app:layout_constraintEnd_toEndOf="@+id/location"
                             app:layout_constraintStart_toStartOf="@+id/imageView9"
                             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
                     </androidx.constraintlayout.widget.ConstraintLayout>

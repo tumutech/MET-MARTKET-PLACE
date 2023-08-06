@@ -156,7 +156,7 @@ public class Login extends AppCompatActivity {
                             });
                         } else {
                             loginDialog.dismiss();
-                            Toast.makeText(Login.this, "Login Failed. Please try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Check your Network", Toast.LENGTH_SHORT).show();
                             loginDialog.dismiss();
                         }
                     }
