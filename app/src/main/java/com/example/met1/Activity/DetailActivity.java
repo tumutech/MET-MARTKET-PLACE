@@ -14,7 +14,7 @@ import com.example.met1.R;
 
 public class DetailActivity extends AppCompatActivity {
     private Button addToCartBtn;
-    private TextView plusBtn, minusBtn, titleTxt, feeTxt, descriptionTxt, numberOrderTxt, startTxt, caloryTxt, timeTxt;
+    private TextView plusBtn, minusBtn, titleTxt, feeTxt, descriptionTxt, numberOrderTxt, startTxt, locationtxt;
     private ImageView picFood;
     private ProductDomain object;
     private int numberOrder = 1;
@@ -40,24 +40,23 @@ public class DetailActivity extends AppCompatActivity {
                 .into(picFood);
 
         titleTxt.setText(object.getTitle());
-        feeTxt.setText("$" + object.getPrice());
+        feeTxt.setText("UGX " + object.getPrice());
         descriptionTxt.setText(object.getDescription());
         numberOrderTxt.setText("" + numberOrder);
-        caloryTxt.setText(object.getEnergy() + " Cal");
         startTxt.setText(object.getDiscount() + "");
-        timeTxt.setText(object.getLocation() + " min");
-        addToCartBtn.setText("Add to cart - $" + Math.round(numberOrder * object.getPrice()));
+        locationtxt.setText(object.getLocation());
+        addToCartBtn.setText("Add to cart - UGX " + Math.round(numberOrder * object.getPrice()));
 
         plusBtn.setOnClickListener(v -> {
             numberOrder = numberOrder + 1;
             numberOrderTxt.setText("" + numberOrder);
-            addToCartBtn.setText("Add to cart - $" + Math.round(numberOrder * object.getPrice()));
+            addToCartBtn.setText("Add to cart - UGX " + Math.round(numberOrder * object.getPrice()));
         });
 
         minusBtn.setOnClickListener(v -> {
             numberOrder = numberOrder - 1;
             numberOrderTxt.setText("" + numberOrder);
-            addToCartBtn.setText("Add to cart - $" + Math.round(numberOrder * object.getPrice()));
+            addToCartBtn.setText("Add to cart - UGX " + Math.round(numberOrder * object.getPrice()));
         });
 
         addToCartBtn.setOnClickListener(v -> {
@@ -68,7 +67,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initView() {
         addToCartBtn = findViewById(R.id.addToCartBtn);
-        timeTxt = findViewById(R.id.location);
+        locationtxt = findViewById(R.id.location);
         feeTxt = findViewById(R.id.priceTxt);
         titleTxt=findViewById(R.id.product_name);
         descriptionTxt = findViewById(R.id.descriptionTxt);
@@ -77,7 +76,7 @@ public class DetailActivity extends AppCompatActivity {
         minusBtn = findViewById(R.id.MinusCartBtn);
         picFood = findViewById(R.id.foodPic);
         startTxt = findViewById(R.id.StarTxt);
-        caloryTxt = findViewById(R.id.calTxt);
+
 
     }
 }

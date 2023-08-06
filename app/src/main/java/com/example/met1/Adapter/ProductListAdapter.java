@@ -15,18 +15,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.met1.Activity.DetailActivity;
+import com.example.met1.Activity.UserHomeFragment;
+import com.example.met1.Activity.productModel;
 import com.example.met1.Domain.ProductDomain;
 import com.example.met1.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHolder> {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
+    private final ArrayList<productModel> list;
     ArrayList<ProductDomain> items;
     Context context;
-
-    public FoodListAdapter(ArrayList<ProductDomain> items) {
-        this.items = items;
+    public ProductListAdapter(Context context, ArrayList<productModel> list) {
+        this.context = context;
+        this.list = list;
     }
+
+//    public ProductListAdapter(ArrayList<ProductDomain> items) {
+//        this.items = items;
+//    }
 
     @NonNull
     @Override
@@ -38,10 +46,14 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.titleTxt.setText(items.get(position).getTitle());
-        holder.location.setText(items.get(position).getLocation());
-        holder.price.setText("UGX" + items.get(position).getPrice());
-        int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPicUrl(), "drawable", holder.itemView.getContext().getPackageName());
+        productModel model= list.get(position);
+        holder.titleTxt.setText(list.get(position).getProductName());
+        holder.location.setText(list.get(position).getDescription());
+        holder.price.setText("UGX" + list.get(position).getProductPrice());
+        String imageUri;
+        imageUri= model.getProductImage();
+        Picasso.get().load(imageUri).into(holder.pic);
+        int drawableResourceId = holder.itemView.getResources().getIdentifier(list.get(position).getProductImage(), "drawable", holder.itemView.getContext().getPackageName());
 
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
@@ -60,7 +72,7 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

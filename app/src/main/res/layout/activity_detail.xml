@@ -95,39 +95,32 @@
 
                         <ImageView
                             android:id="@+id/imageView9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/time" />
-
-                        <TextView
-                            android:id="@+id/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="- min"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toEndOf="@+id/imageView9"
-                            app:layout_constraintTop_toTopOf="@+id/imageView9"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:srcCompat="@android:drawable/ic_menu_mylocation" />
 
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="Delivery"
+                            android:text="Location"
                             android:textColor="@color/black"
-                            app:layout_constraintEnd_toEndOf="@+id/location"
                             app:layout_constraintStart_toStartOf="@+id/imageView9"
                             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+                        <TextView
+                            android:id="@+id/location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Katete"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+                            app:layout_constraintStart_toEndOf="@+id/imageView9"
+                            app:layout_constraintTop_toTopOf="@+id/imageView9" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
@@ -172,54 +165,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
-                            android:text="Rating"
-                            android:textColor="@color/black"
-                            app:layout_constraintEnd_toEndOf="@+id/location"
-                            app:layout_constraintStart_toStartOf="@+id/imageView9"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView9" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/view2"
-                        android:layout_width="1dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:background="@color/grey" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33">
-
-                        <ImageView
-                            android:id="@+id/imageView9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/flame" />
-
-                        <TextView
-                            android:id="@+id/calTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="0 cal"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                            app:layout_constraintStart_toEndOf="@+id/imageView9"
-                            app:layout_constraintTop_toTopOf="@+id/imageView9"
-                            app:layout_constraintVertical_bias="0.0" />
-
-                        <TextView
-                            android:id="@+id/textView12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:text="Energy"
+                            android:text="Discount"
                             android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="@+id/location"
                             app:layout_constraintStart_toStartOf="@+id/imageView9"

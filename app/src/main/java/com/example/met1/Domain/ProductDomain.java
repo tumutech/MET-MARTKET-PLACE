@@ -3,6 +3,9 @@ package com.example.met1.Domain;
 import java.io.Serializable;
 
 public class ProductDomain implements Serializable {
+    public ProductDomain() {
+    }
+
     private String title;
     private String description;
     private String picUrl;
