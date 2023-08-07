@@ -52,13 +52,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.price.setText("UGX" + " "+decimalFormat.format(pricevalue));
         String imageUri;
         imageUri= model.getProductImage();
-//        Picasso.get().load(imageUri).into(holder.pic);
-//        int drawableResourceId = holder.itemView.getResources().getIdentifier(list.get(position).getProductImage(), "drawable", holder.itemView.getContext().getPackageName());
-//
-//        Glide.with(holder.itemView.getContext())
-//                .load(drawableResourceId)
-//                .transform(new GranularRoundedCorners(30, 30, 0, 0))
-//                .into(holder.pic);
         Glide.with(holder.itemView.getContext())
                 .load(imageUri)
                 .transform(new GranularRoundedCorners(30, 30, 0, 0))
