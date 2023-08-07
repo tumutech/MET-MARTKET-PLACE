@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.met1.Helper.ManagmentCart;
 import com.example.met1.R;
 import com.squareup.picasso.Picasso;
@@ -34,16 +35,13 @@ public class DetailActivity extends AppCompatActivity {
         object = (productModel) getIntent().getSerializableExtra("object");
         String imageUri;
         imageUri= object.getProductImage();
-        Picasso.get().load(imageUri).into(picproduct);
-
-//        int drawableResourceId = this.getResources().getIdentifier(object.getProductImage(), "drawable", this.getPackageName());
-//        Glide.with(this)
-//                .load(drawableResourceId)
-//                .into(picFood);
+        Glide.with(this)
+                .load(imageUri)
+                .into(picproduct);
 
         titleTxt.setText(object.getProductName());
         feeTxt.setText("UGX " + object.getProductPrice());
-        descriptionTxt.setText(object.getDescription());
+        descriptionTxt.setText(object.getDescription_details());
         numberOrderTxt.setText("" + numberOrder);
         startTxt.setText(object.getDiscount() + "");
         locationtxt.setText(object.getDescription());

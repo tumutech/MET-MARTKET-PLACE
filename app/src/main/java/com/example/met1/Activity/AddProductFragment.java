@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -38,7 +39,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class AddProductFragment extends Fragment {
-TextInputEditText name, description, price, discount, details;
+TextInputEditText name, description, price, discount, descriptiondetail,product_quantity;
     Spinner selection;
     ImageView productImage;
 
@@ -46,6 +47,7 @@ TextInputEditText name, description, price, discount, details;
     Uri ImageUri ;
     ProgressDialog progressDialog;
     private FirebaseDatabase mdatabase;
+    private FirebaseAuth fAuth;
     private DatabaseReference mref;
     private FirebaseStorage mstorage;
     private static int PICK_IMAGE_REQUEST = 1;
@@ -62,14 +64,16 @@ TextInputEditText name, description, price, discount, details;
         price= view.findViewById(R.id.ItemPrice);
         discount= view.findViewById(R.id.Itemdiscount);
         description= view.findViewById(R.id.ItemDesc);
-        description= view.findViewById(R.id.ItemDetails);
+        descriptiondetail= view.findViewById(R.id.ItemDetails);
         selection= view.findViewById(R.id.product_category);
         productImage= view.findViewById(R.id.ItemImage);
         Imagechoose= view.findViewById(R.id.ChooseImage);
         upload= view.findViewById(R.id.UploadBtn);
+        product_quantity = view.findViewById(R.id.itemquantity);
 
 
         //Firebase database initialisation
+        fAuth = FirebaseAuth.getInstance();
         mdatabase= FirebaseDatabase.getInstance();
         mref= mdatabase.getReference().child("Uploads");
         mstorage= FirebaseStorage.getInstance();
@@ -95,8 +99,9 @@ TextInputEditText name, description, price, discount, details;
                 String prices= price.getText().toString().trim();
                 String pdiscount= discount.getText().toString().trim();
                 String desc= description.getText().toString().trim();
-                String descDetail= description.getText().toString().trim();
+                String descDetail= descriptiondetail.getText().toString().trim();
                 String selected= selection.getSelectedItem().toString().trim();
+                String pquantity = product_quantity.getText().toString().trim();
                 if(Productname.isEmpty()){
                     name.setError("Product Name Required");
                     name.requestFocus();
@@ -146,6 +151,8 @@ TextInputEditText name, description, price, discount, details;
                                 modal.setProductPrice(prices);
                                 modal.setDiscount(pdiscount);
                                 modal.setDescription_details(descDetail);
+                                modal.setQuantity(pquantity);
+                                modal.setPuserid(fAuth.getCurrentUser().getUid());
                                 modal.setSelection(selected);
                                 mdatabase.getReference().child("Products").push().setValue(modal).
                                         addOnSuccessListener(new OnSuccessListener<Void>() {

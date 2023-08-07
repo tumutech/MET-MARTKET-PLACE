@@ -21,12 +21,14 @@ import com.example.met1.Domain.ProductDomain;
 import com.example.met1.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
     private final ArrayList<productModel> list;
     ArrayList<ProductDomain> items;
     Context context;
+    DecimalFormat decimalFormat = new DecimalFormat("#,##0'/='");
     public ProductListAdapter(Context context, ArrayList<productModel> list) {
         this.context = context;
         this.list = list;
@@ -43,16 +45,22 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         productModel model= list.get(position);
+        holder.quantityleft.setText(list.get(position).getQuantity()+" "+"items left");
         holder.titleTxt.setText(list.get(position).getProductName());
         holder.location.setText(list.get(position).getDescription());
-        holder.price.setText("UGX" + " "+list.get(position).getProductPrice());
+        int pricevalue = Integer.parseInt(list.get(position).getProductPrice());
+        holder.price.setText("UGX" + " "+decimalFormat.format(pricevalue));
         String imageUri;
         imageUri= model.getProductImage();
-        Picasso.get().load(imageUri).into(holder.pic);
-        int drawableResourceId = holder.itemView.getResources().getIdentifier(list.get(position).getProductImage(), "drawable", holder.itemView.getContext().getPackageName());
-
+//        Picasso.get().load(imageUri).into(holder.pic);
+//        int drawableResourceId = holder.itemView.getResources().getIdentifier(list.get(position).getProductImage(), "drawable", holder.itemView.getContext().getPackageName());
+//
+//        Glide.with(holder.itemView.getContext())
+//                .load(drawableResourceId)
+//                .transform(new GranularRoundedCorners(30, 30, 0, 0))
+//                .into(holder.pic);
         Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
+                .load(imageUri)
                 .transform(new GranularRoundedCorners(30, 30, 0, 0))
                 .into(holder.pic);
 
@@ -72,7 +80,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTxt, location, price;
+        TextView titleTxt, location, price,quantityleft ;
         ImageView pic;
 
         public ViewHolder(@NonNull View itemView) {
@@ -81,6 +89,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             location = itemView.findViewById(R.id.location);
             price = itemView.findViewById(R.id.product_price);
             pic = itemView.findViewById(R.id.pic);
+            quantityleft = itemView.findViewById(R.id.quantityleft);
 
         }
     }

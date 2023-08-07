@@ -3,13 +3,15 @@ package com.example.met1.Activity;
 import java.io.Serializable;
 
 public class productModel implements Serializable {
-    String productName,description,productImage,productPrice,discount, description_details,selection;
+    String productName,description,productImage,productPrice,discount, description_details,selection,quantity,puserid;
     private int numberinCart;
 
     public productModel() {
     }
 
-    public productModel(String productName, String description, String productImage, String productPrice, String discount, String description_details, String selection) {
+    public productModel(String productName, String description, String productImage, String productPrice, String discount, String description_details, String selection,String aquantity,String apuserid) {
+        this.quantity = aquantity;
+        this.puserid = apuserid;
         this.productName = productName;
         this.description = description;
         this.productImage = productImage;
@@ -17,6 +19,22 @@ public class productModel implements Serializable {
         this.discount = discount;
         this.description_details = description_details;
         this.selection = selection;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPuserid() {
+        return puserid;
+    }
+
+    public void setPuserid(String puserid) {
+        this.puserid = puserid;
     }
 
     public void setProductName(String productName) {

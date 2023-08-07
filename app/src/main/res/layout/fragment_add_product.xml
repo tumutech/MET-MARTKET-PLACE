@@ -212,6 +212,18 @@
                     android:entries="@array/category_array"
                     android:prompt="@string/select_category"
                     />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/itemquantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Quantity" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -237,14 +249,6 @@
 
             </LinearLayout>
         </ScrollView>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/backbutton"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right|end"
-            android:clickable="true"
-            android:src="@drawable/arrow" />
 
 
     </LinearLayout>

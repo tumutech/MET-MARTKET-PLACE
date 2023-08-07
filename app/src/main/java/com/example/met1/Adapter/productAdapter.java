@@ -42,6 +42,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.myViewHo
     holder.description.setText(model.getDescription());
     holder.productPrice.setText("UGX "+" " + model.getProductPrice());
     holder.discount.setText(model.getDiscount());
+    holder.description_details.setText(model.getDescription_details());
     String imageUri;
     imageUri= model.getProductImage();
     Picasso.get().load(imageUri).into(holder.productImage);
@@ -67,10 +68,11 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.myViewHo
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             productName= itemView.findViewById(R.id.product_name);
-            description= itemView.findViewById(R.id.descriptionTxt);
+            description= itemView.findViewById(R.id.location);
             productPrice= itemView.findViewById(R.id.product_price);
             discount= itemView.findViewById(R.id.Itemdiscount);
             productImage=itemView.findViewById(R.id.ItemImage);
+            description_details = itemView.findViewById(R.id.descriptionTxt);
 
 
         }
