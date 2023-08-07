@@ -1,7 +1,10 @@
 package com.example.met1.Activity;
 
-public class productModel {
+import java.io.Serializable;
+
+public class productModel implements Serializable {
     String productName,description,productImage,productPrice,discount, description_details,selection;
+    private int numberinCart;
 
     public productModel() {
     }
@@ -70,5 +73,12 @@ public class productModel {
 
     public String getSelection() {
         return selection;
+    }
+    public void setNumberinCart(int numberinCart) {
+        this.numberinCart = numberinCart;
+    }
+
+    public int getNumberinCart() {
+        return numberinCart;
     }
 }

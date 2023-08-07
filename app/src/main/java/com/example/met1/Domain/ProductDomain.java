@@ -14,7 +14,7 @@ public class ProductDomain implements Serializable {
     private double discount;
     private int numberinCart;
 
-    public ProductDomain(String title, String description, String picUrl, double price, String location, double discount) {
+    public ProductDomain(String title, String description, String picUrl, double price, String location, double discount)  {
         this.title = title;
         this.description = description;
         this.picUrl = picUrl;

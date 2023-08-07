@@ -13,13 +13,15 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNav"
         />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:labelVisibilityMode="labeled"
-        android:id="@+id/bottomNav"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/usermenu"
-        />
+        app:itemIconTint="@color/menucolors"
+        app:itemTextColor="@color/menucolors"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/usermenu" />
 
 </RelativeLayout>

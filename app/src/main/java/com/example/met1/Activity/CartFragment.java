@@ -27,7 +27,7 @@ import com.example.met1.R;
  */
 public class CartFragment extends Fragment {
     private RecyclerView.Adapter adapter;
-    private RecyclerView recyclerViewList;
+    private RecyclerView recyclerViewList,view3;
     private ManagmentCart managmentCart;
     private TextView totalFeeTxt, taxTxt, deliveryTxt, totalTxt, emptyTxt;
     private double tax;
@@ -70,7 +70,7 @@ public class CartFragment extends Fragment {
 
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerViewList.setLayoutManager(linearLayoutManager);
+        view3.setLayoutManager(linearLayoutManager);
         adapter = new CartListAdapter(managmentCart.getListCart(), getContext(), new ChangeNumberItemsListener() {
             @Override
             public void changed() {
@@ -78,7 +78,7 @@ public class CartFragment extends Fragment {
             }
         });
 
-        recyclerViewList.setAdapter(adapter);
+        view3.setAdapter(adapter);
 
         if(managmentCart.getListCart().isEmpty()){
             emptyTxt.setVisibility(View.VISIBLE);
@@ -102,17 +102,19 @@ public class CartFragment extends Fragment {
         double total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100.0) / 100;
         double itemTotal = Math.round(managmentCart.getTotalFee() * 100.0) / 100.0;
 
-        totalFeeTxt.setText("$" + itemTotal);
-        taxTxt.setText("$" + tax);
-        deliveryTxt.setText("$" + delivery);
-        totalTxt.setText("$" + total);
+        totalFeeTxt.setText("UGX"+" "+ itemTotal);
+        taxTxt.setText("UGX " +" "+ tax);
+        deliveryTxt.setText("UGX"+" " + delivery);
+        totalTxt.setText("UGX "+" " + total);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        view3 = view.findViewById(R.id.view3);
         totalFeeTxt = view.findViewById(R.id.totalFeeTxt);
         taxTxt = view.findViewById(R.id.taxTxt);
         deliveryTxt = view.findViewById(R.id.deliveryTxt);
@@ -122,8 +124,10 @@ public class CartFragment extends Fragment {
         backBtn = view.findViewById(R.id.backBtn);
         emptyTxt = view.findViewById(R.id.emptyTxt);
         managmentCart = new ManagmentCart(getContext());
+        initList();
         calculateCart();
         setVariable();
+
         return view;
 
 

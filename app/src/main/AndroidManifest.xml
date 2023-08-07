@@ -19,23 +19,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MET">
         <activity
-            android:name="com.example.met1.Activity.CartActivity"
+            android:name=".splash"
             android:exported="false" />
         <activity
-            android:name="com.example.met1.Activity.DetailActivity"
+            android:name=".Activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.met1.Activity.MainActivity"
+            android:name=".Activity.DetailActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.met1.Activity.Admin"
+            android:name=".Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.met1.Activity.SignupActivity"
+            android:name=".Activity.Admin"
             android:exported="false" />
-
         <activity
-            android:name="com.example.met1.Activity.Login"
+            android:name=".Activity.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

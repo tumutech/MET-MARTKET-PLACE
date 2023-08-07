@@ -94,7 +94,7 @@
                     style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$-"
+                    android:text="UGX -"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView13" />
 
@@ -113,7 +113,7 @@
                     style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$-"
+                    android:text="UGX -"
                     app:layout_constraintEnd_toEndOf="@+id/totalFeeTxt"
                     app:layout_constraintTop_toTopOf="@+id/textView16" />
 
@@ -132,7 +132,7 @@
                     style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$-"
+                    android:text="UGX -"
                     app:layout_constraintEnd_toEndOf="@+id/deliveryTxt"
                     app:layout_constraintTop_toTopOf="@+id/textView18" />
 
@@ -161,7 +161,7 @@
                     style="@style/textStyleBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$-"
+                    android:text="UGX -"
                     app:layout_constraintEnd_toEndOf="@+id/taxTxt"
                     app:layout_constraintTop_toTopOf="@+id/textView20" />
             </androidx.constraintlayout.widget.ConstraintLayout>

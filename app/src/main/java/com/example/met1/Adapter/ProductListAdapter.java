@@ -32,10 +32,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         this.list = list;
     }
 
-//    public ProductListAdapter(ArrayList<ProductDomain> items) {
-//        this.items = items;
-//    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,7 +45,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         productModel model= list.get(position);
         holder.titleTxt.setText(list.get(position).getProductName());
         holder.location.setText(list.get(position).getDescription());
-        holder.price.setText("UGX" + list.get(position).getProductPrice());
+        holder.price.setText("UGX" + " "+list.get(position).getProductPrice());
         String imageUri;
         imageUri= model.getProductImage();
         Picasso.get().load(imageUri).into(holder.pic);
@@ -64,7 +60,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(holder.itemView.getContext(), DetailActivity.class);
-                intent.putExtra("object",items.get(position));
+                intent.putExtra("object",list.get(position));
                 holder.itemView.getContext().startActivity(intent);
             }
         });

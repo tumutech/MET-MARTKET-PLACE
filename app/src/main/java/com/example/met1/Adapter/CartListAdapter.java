@@ -12,21 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.example.met1.Domain.ProductDomain;
+import com.example.met1.Activity.productModel;
 import com.example.met1.Helper.ChangeNumberItemsListener;
 import com.example.met1.Helper.ManagmentCart;
 import com.example.met1.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> {
 
-    ArrayList<ProductDomain> listFoodSelected;
+    ArrayList<productModel> listProductSelected;
     private ManagmentCart managmentCart;
     ChangeNumberItemsListener changeNumberItemsListener;
 
-    public CartListAdapter(ArrayList<ProductDomain> listFoodSelected, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
-        this.listFoodSelected = listFoodSelected;
+    public CartListAdapter(ArrayList<productModel> listProductSelected, Context context, ChangeNumberItemsListener changeNumberItemsListener) {
+        this.listProductSelected = listProductSelected;
         managmentCart=new ManagmentCart(context);
         this.changeNumberItemsListener = changeNumberItemsListener;
     }
@@ -41,25 +42,29 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(listFoodSelected.get(position).getTitle());
-        holder.feeEachItem.setText("$" + listFoodSelected.get(position).getPrice());
-        holder.totalEachItem.setText("$" + Math.round((listFoodSelected.get(position).getNumberinCart() * listFoodSelected.get(position).getPrice())));
-        holder.num.setText(String.valueOf(listFoodSelected.get(position).getNumberinCart()));
+        holder.title.setText(listProductSelected.get(position).getProductName());
+        holder.feeEachItem.setText("UGX "+" "+ listProductSelected.get(position).getProductPrice());
+        int prctag = Integer.parseInt(listProductSelected.get(position).getProductPrice());
+        holder.totalEachItem.setText("UGX"+" " + Math.round((listProductSelected.get(position).getNumberinCart() * prctag)));
+        holder.num.setText(String.valueOf(listProductSelected.get(position).getNumberinCart()));
+        String imageUri;
+        imageUri= listProductSelected.get(position).getProductImage();
+        Picasso.get().load(imageUri).into(holder.pic);
 
-        int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(listFoodSelected.get(position).getPicUrl(),"drawable",holder.itemView.getContext().getPackageName());
+        //int drawableResourceId=holder.itemView.getContext().getResources().getIdentifier(listProductSelected.get(position).getProductImage(),"drawable",holder.itemView.getContext().getPackageName());
 
-        Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
-                .transform(new GranularRoundedCorners(30,30,30,30))
-                .into(holder.pic);
+//        Glide.with(holder.itemView.getContext())
+//                .load(drawableResourceId)
+//                .transform(new GranularRoundedCorners(30,30,30,30))
+//                .into(holder.pic);
 
 
-        holder.plusItem.setOnClickListener(v -> managmentCart.plusNumberFood(listFoodSelected, position, () -> {
+        holder.plusItem.setOnClickListener(v -> managmentCart.plusNumberFood(listProductSelected, position, () -> {
             notifyDataSetChanged();
             changeNumberItemsListener.changed();
         }));
 
-        holder.minusItem.setOnClickListener(v -> managmentCart.minusNumberFood(listFoodSelected, position, () -> {
+        holder.minusItem.setOnClickListener(v -> managmentCart.minusNumberFood(listProductSelected, position, () -> {
             notifyDataSetChanged();
             changeNumberItemsListener.changed();
         }));
@@ -67,7 +72,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return listFoodSelected.size();
+        return listProductSelected.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

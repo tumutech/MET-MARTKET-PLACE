@@ -40,7 +40,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.myViewHo
     productModel model= list.get(position);
     holder.productName.setText(model.getProductName());
     holder.description.setText(model.getDescription());
-    holder.productPrice.setText("SHS." + model.getProductPrice());
+    holder.productPrice.setText("UGX "+" " + model.getProductPrice());
     holder.discount.setText(model.getDiscount());
     String imageUri;
     imageUri= model.getProductImage();
