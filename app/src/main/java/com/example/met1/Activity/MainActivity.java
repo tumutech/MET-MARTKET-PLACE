@@ -22,29 +22,11 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, userHomeFragment).commit();
         bottomNavigationView.setOnItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
-//        getSupportFragmentManager().beginTransaction().add(R.id.homecontainer, new UserHomeFragment()).commit();
-//        getFragmentManager().beginTransaction().add(R.id.homecontainer,new UserHomeFragment()).commit();
-
-
-//        bottomNavigation();
-
     }
-
-//    private void bottomNavigation() {
-////        LinearLayout homeBtn=findViewById(R.id.homeBtn);
-////        LinearLayout cartBtn=findViewById(R.id.cartBtn);
-////        LinearLayout settings = findViewById(R.id.settings);
-//
-////        homeBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,MainActivity.class)));
-////
-////        cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this,CartActivity.class)));
-//
-//    }
-
-
 
     UserHomeFragment userHomeFragment=new UserHomeFragment();
     ProfileFragment profileFragment=new ProfileFragment();
+    settingsFragment settingFragment = new settingsFragment();
     CartFragment cartFragment = new CartFragment();
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -55,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements  BottomNavigation
                         .commit();
                 return true;
 
-            case R.id.profile:
+            case R.id.settings:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frameLayout, profileFragment)
+                        .replace(R.id.frameLayout, settingFragment)
                         .commit();
                 return true;
             case R.id.cart:

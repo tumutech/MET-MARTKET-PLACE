@@ -13,7 +13,7 @@
         android:icon="@drawable/bottom_btn3"
         android:title="Support" />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/settings"
         android:icon="@drawable/bottom_btn4"
         android:title="Setting" />
 </menu>

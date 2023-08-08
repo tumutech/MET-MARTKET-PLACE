@@ -47,6 +47,13 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         dr = FirebaseDatabase.getInstance().getReference("Users");
         loginDialog=new ProgressDialog(this);
+        SessionManager sessionManager = new SessionManager(this);
+        if (sessionManager.isLoggedIn()) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        } else {
+            // User is not logged in, show login screen
+        }
 
 
         regtxt.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +100,7 @@ public class Login extends AppCompatActivity {
                                                                 if (task.isSuccessful()) {
                                                                     loginDialog.dismiss();
                                                                     Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                                    sessionManager.loginUser(currentUser);
                                                                     startActivity(new Intent(Login.this, Admin.class));
                                                                     finish();
                                                                 } else {
@@ -121,6 +129,7 @@ public class Login extends AppCompatActivity {
                                                                 if (task.isSuccessful()) {
                                                                     loginDialog.dismiss();
                                                                     Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                                    sessionManager.loginUser(currentUser);
                                                                     startActivity(new Intent(Login.this, MainActivity.class));
                                                                     finish();
                                                                 } else {
