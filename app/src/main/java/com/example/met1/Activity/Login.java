@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import java.util.regex.*;
 public class Login extends AppCompatActivity {
     FirebaseAuth fAuth;
     DatabaseReference dr;
@@ -35,6 +38,7 @@ public class Login extends AppCompatActivity {
     FirebaseUser fUser;
     private ProgressDialog loginDialog;
     private FirebaseUser currentUser;
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,112 +69,153 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginDialog.setTitle("Login in progress");
-                loginDialog.setMessage("plese wait");
-                loginDialog.setCancelable(false);
-                loginDialog.show();
                 //defining email and password
                 String Email = email.getText().toString();
                 String Password = password.getText().toString();
-                fAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            currentUser = fAuth.getCurrentUser();
-                            String userId = currentUser.getUid();
-                            Log.d("ID",userId);
+                //validating if user has input username and password
+                if(Email.isEmpty()){
+                    email.setError("Email is Required");
+                    email.requestFocus();
+                    return;
+                }
+                if(Password.isEmpty()){
+                    password.setError("Password is required");
+                    password.requestFocus();
+                    return;
+                }
+                //verifying if email and password have the valid formart
+                if(isValidEmail(Email,email)){
+                    // Check for internet connectivity
+                    if (isConnectedToInternet()) {
+                        showlogindialog();
+                        fAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    currentUser = fAuth.getCurrentUser();
+                                    String userId = currentUser.getUid();
+                                    Log.d("ID",userId);
 
-                            // Retrieve user data from Realtime Database
-                            dr.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        String role = dataSnapshot.child("role").getValue(String.class);
+                                    // Retrieve user data from Realtime Database
+                                    dr.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()) {
+                                                String role = dataSnapshot.child("role").getValue(String.class);
 
-                                        if (role != null && role.equals("Admin")) {
-                                            // Update the user's email in Firebase Authentication
-                                            currentUser.updateEmail(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        // Update the user's email in Realtime Database
-                                                        dr.child(userId).child("email").setValue(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    loginDialog.dismiss();
-                                                                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                                    sessionManager.loginUser(currentUser);
-                                                                    startActivity(new Intent(Login.this, Admin.class));
-                                                                    finish();
-                                                                } else {
-                                                                    loginDialog.dismiss();
-                                                                    Toast.makeText(Login.this, "Failed to update email", Toast.LENGTH_SHORT).show();
-                                                                }
+                                                if (role != null && role.equals("Admin")) {
+                                                    // Update the user's email in Firebase Authentication
+                                                    currentUser.updateEmail(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                // Update the user's email in Realtime Database
+                                                                dr.child(userId).child("email").setValue(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            loginDialog.dismiss();
+                                                                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                                            sessionManager.loginUser(currentUser);
+                                                                            startActivity(new Intent(Login.this, Admin.class));
+                                                                            finish();
+                                                                        } else {
+                                                                            loginDialog.dismiss();
+                                                                            Toast.makeText(Login.this, "Failed to update email", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                loginDialog.dismiss();
+                                                                Toast.makeText(Login.this, "Failed to update email", Toast.LENGTH_SHORT).show();
                                                             }
-                                                        });
-                                                    } else {
-                                                        loginDialog.dismiss();
-                                                        Toast.makeText(Login.this, "Failed to update email", Toast.LENGTH_SHORT).show();
-                                                    }
+                                                            loginDialog.dismiss();
+                                                        }
+                                                    });
+                                                }else if (role != null && role.equals("Customer")) {
+                                                    // Update the user's email in Firebase Authentication
+                                                    currentUser.updateEmail(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                // Update the user's email in Realtime Database
+                                                                dr.child(userId).child("email").setValue(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            loginDialog.dismiss();
+                                                                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                                                            sessionManager.loginUser(currentUser);
+                                                                            startActivity(new Intent(Login.this, MainActivity.class));
+                                                                            finish();
+                                                                        } else {
+                                                                            loginDialog.dismiss();
+                                                                            Toast.makeText(Login.this, "Failed to login", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                loginDialog.dismiss();
+                                                                Toast.makeText(Login.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                    });
+                                                }else {
+                                                    loginDialog.dismiss();
+                                                    Toast.makeText(Login.this, "Login Failed. Please try again", Toast.LENGTH_SHORT).show();
                                                     loginDialog.dismiss();
                                                 }
-                                            });
-                                        }else if (role != null && role.equals("Customer")) {
-                                            // Update the user's email in Firebase Authentication
-                                            currentUser.updateEmail(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        // Update the user's email in Realtime Database
-                                                        dr.child(userId).child("email").setValue(Email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    loginDialog.dismiss();
-                                                                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                                                    sessionManager.loginUser(currentUser);
-                                                                    startActivity(new Intent(Login.this, MainActivity.class));
-                                                                    finish();
-                                                                } else {
-                                                                    loginDialog.dismiss();
-                                                                    Toast.makeText(Login.this, "Failed to update email", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            }
-                                                        });
-                                                    } else {
-                                                        loginDialog.dismiss();
-                                                        Toast.makeText(Login.this, "Failed to update email", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
-                                        }else {
+                                            } else {
+                                                loginDialog.dismiss();
+                                                Toast.makeText(Login.this, "User not found", Toast.LENGTH_SHORT).show();
+                                                loginDialog.dismiss();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
                                             loginDialog.dismiss();
                                             Toast.makeText(Login.this, "Login Failed. Please try again", Toast.LENGTH_SHORT).show();
                                             loginDialog.dismiss();
                                         }
-                                    } else {
-                                        loginDialog.dismiss();
-                                        Toast.makeText(Login.this, "User not found", Toast.LENGTH_SHORT).show();
-                                        loginDialog.dismiss();
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    });
+                                } else {
                                     loginDialog.dismiss();
-                                    Toast.makeText(Login.this, "Login Failed. Please try again", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
                                     loginDialog.dismiss();
                                 }
-                            });
-                        } else {
-                            loginDialog.dismiss();
-                            Toast.makeText(Login.this, "Check your Network", Toast.LENGTH_SHORT).show();
-                            loginDialog.dismiss();
-                        }
+                            }
+                        });
+                    } else {
+                        Toast.makeText(Login.this, "Please connect to internet", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                }
+
             }
         });
+    }
+    public static boolean isValidEmail(String email,EditText emailField) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(email);
+        if(!matcher.matches()){
+            emailField.setError("Invalid email: Hint Should contain @ and .");
+            emailField.requestFocus();
+        }
+        return matcher.matches();
+    }
+    public void showlogindialog(){
+        loginDialog.setTitle("Logging in");
+        loginDialog.setMessage("Please wait");
+        loginDialog.setCancelable(false);
+        loginDialog.show();
+    }
+    private boolean isConnectedToInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+            return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        }
+        return false;
     }
 }
