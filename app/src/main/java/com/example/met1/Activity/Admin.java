@@ -15,6 +15,7 @@ public class Admin extends AppCompatActivity {
     UserHomeFragment userHomeFragment= new UserHomeFragment();
     CartFragment cartFragment= new CartFragment();
     ProfileFragment profileFragment= new ProfileFragment();
+    settingsFragment settingsFragment = new settingsFragment();
     AddProductFragment addProductFragment= new AddProductFragment();
 
 
@@ -32,17 +33,12 @@ public class Admin extends AppCompatActivity {
             public boolean onNavigationItemSelected( MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, userHomeFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, addProductFragment).commit();
                         return true;
-                    case R.id.cart:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, cartFragment).addToBackStack(null).commit();
+                    case R.id.settings:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,settingsFragment).addToBackStack(null).commit();
                         return true;
-//                    case R.id.notification:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).addToBackStack(null).commit();
-//                        return true;
-//                    case R.id.account:
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.container, accountFragment).addToBackStack(null).commit();
-//                        return true;
+
                 }
                 return false;
             }

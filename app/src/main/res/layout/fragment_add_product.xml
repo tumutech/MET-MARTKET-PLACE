@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Add New Items"
+                android:text="Add New Products"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
         </RelativeLayout>
@@ -154,6 +154,7 @@
                         android:id="@+id/ItemPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/black" />
 
@@ -176,6 +177,7 @@
                         android:id="@+id/Itemdiscount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/black" />
 
@@ -221,7 +223,8 @@
                         android:id="@+id/itemquantity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Quantity" />
+                        android:hint="Quantity"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RelativeLayout
